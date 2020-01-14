@@ -19,7 +19,8 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
     - name: Build Docker image
-      run: |        
-        docker build . --file Dockerfile --tag docker.pkg.github.com/misaelntirushwa/events-planning-api/api:${{ VERSION }}
+      run: |
+        VERSION=$(project.version)        
+        docker build . --file Dockerfile --tag docker.pkg.github.com/misaelntirushwa/events-planning-api/api:${ VERSION }
         docker login docker.pkg.github.com --username misaelntirushwa --password ${{ secrets.GITHUB_TOKEN }}
-        docker push docker.pkg.github.com/misaelntirushwa/events-planning-api/api:${{ VERSION }}
+        docker push docker.pkg.github.com/misaelntirushwa/events-planning-api/api:${ VERSION }
