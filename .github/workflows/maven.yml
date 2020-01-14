@@ -20,7 +20,7 @@ jobs:
       run: mvn -B package --file pom.xml
     - name: Build Docker image
       run: |
-        VERSION=$(date +%s)
+        VERSION=$(date +%s)        
         docker build . --file Dockerfile --tag docker.pkg.github.com/misaelntirushwa/events-planning-api/api:${VERSION}
         docker login docker.pkg.github.com --username misaelntirushwa --password ${{ secrets.GITHUB_TOKEN }}
         docker push docker.pkg.github.com/misaelntirushwa/events-planning-api/api:${VERSION}
