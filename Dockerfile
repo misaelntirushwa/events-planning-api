@@ -5,7 +5,8 @@ COPY . .
 RUN mvn clean package
 
 FROM openjdk:8
-COPY --from=maven /app/target/events-planning-api-0.0.1-SNAPSHOT.jar events-planning-api-0.0.1-SNAPSHOT.jar
+ARG JAR_FILE=/app/target/*.jar
+COPY --from=maven ${JAR_FILE} events-planning-api.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "events-planning-api-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "events-planning-api.jar"]
 
